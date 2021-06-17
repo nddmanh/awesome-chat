@@ -10,6 +10,8 @@ export const transErrors = {
     account_removed: "Email nay da bi xoa.",
     account_not_active: "Email nay chua duoc kich hoat.",
     token_undefined: "Token khong ton tai",
+    login_failed: "Sai tai khoan hoac mat khau!",
+    server_error: "Server dang bi loi, thu lai sau.",
 };
 
 export const transSuccess = {
@@ -17,6 +19,9 @@ export const transSuccess = {
         return `Tai khoan <strong>${userEmail}</strong> da duoc tao, vui long kiem tra lai Email cua ban de active tai khoan truoc khi dang nhap`;
     },
     account_actived: "Kich hoat tai khoan thanh cong, ban da co the dang nhap vao ung dung.",
+    loginSuccess: (username) => {
+        return `Xin chao ${username}, chuc ban mot ngay tot lanh! `
+    },
 };
 
 export const transMail = {

@@ -1,9 +1,7 @@
 <% if(errors != "") { %>
     <% errors.forEach((item) => {  %>
         <script>
-            // $(document).ready(function(){
-                openRegisterModal();
-            // });
+            openLoginModal();
         </script>
         <div class="alert alert-danger"><%- item %></div>
     <% }); %>

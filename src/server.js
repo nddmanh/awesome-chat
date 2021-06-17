@@ -5,9 +5,10 @@ import expressEjsExtend from "express-ejs-extend";
 import initRouters from "./routers/web";
 import path from "path";
 import bodyParser from "body-parser";
+import cookieParser from "cookie-parser";
 import connectFlash from "connect-flash";
 import configSession from "./config/session";
-import cookiaParser from "cookie-parser";
+import passport from "passport";
 
 // Init app
 let app = express();
@@ -29,6 +30,13 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 // Enable flash messages
 app.use(connectFlash());
+
+// Config cookie parser
+app.use(cookieParser());
+
+// Config passport js
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Init all router
 initRouters(app);
