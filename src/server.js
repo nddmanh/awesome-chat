@@ -10,37 +10,81 @@ import connectFlash from "connect-flash";
 import configSession from "./config/session";
 import passport from "passport";
 
-// Init app
-let app = express();
+import pem from "pem";
+import https from "https";
 
-// Connect to MongoDB
-ConnectDB();
+pem.createCertificate({ days: 1, selfSigned: true }, function (err, keys) {
+    if (err) {
+      throw err
+    }
+    
+    // Init app
+    let app = express();
 
-// Config session
-configSession(app);
+    // Connect to MongoDB
+    ConnectDB();
 
-// Config view engine
-app.engine("ejs", expressEjsExtend);
-app.set("view engine", "ejs");
-app.set("views", "./src/views");
-app.use(express.static(path.join(__dirname, 'public')));
+    // Config session
+    configSession(app);
 
-// Enable post data for request
-app.use(bodyParser.urlencoded({extended: true}));
+    // Config view engine
+    app.engine("ejs", expressEjsExtend);
+    app.set("view engine", "ejs");
+    app.set("views", "./src/views");
+    app.use(express.static(path.join(__dirname, 'public')));
 
-// Enable flash messages
-app.use(connectFlash());
+    // Enable post data for request
+    app.use(bodyParser.urlencoded({extended: true}));
 
-// Config cookie parser
-app.use(cookieParser());
+    // Enable flash messages
+    app.use(connectFlash());
 
-// Config passport js
-app.use(passport.initialize());
-app.use(passport.session());
+    // Config cookie parser
+    app.use(cookieParser());
 
-// Init all router
-initRouters(app);
+    // Config passport js
+    app.use(passport.initialize());
+    app.use(passport.session());
 
-app.listen(process.env.APP_PORT , process.env.APP_HOST , () =>  {
-    console.log(`Xin chao Duc Manh, server running at ${process.env.APP_HOST }:${process.env.APP_PORT }`);
+    // Init all router
+    initRouters(app);
+  
+    https.createServer({ key: keys.clientKey, cert: keys.certificate }, app).listen(process.env.APP_PORT , process.env.APP_HOST , () =>  {
+        console.log(`Xin chao Duc Manh, server running at ${process.env.APP_HOST }:${process.env.APP_PORT }`);
+    });
 });
+
+// // Init app
+// let app = express();
+
+// // Connect to MongoDB
+// ConnectDB();
+
+// // Config session
+// configSession(app);
+
+// // Config view engine
+// app.engine("ejs", expressEjsExtend);
+// app.set("view engine", "ejs");
+// app.set("views", "./src/views");
+// app.use(express.static(path.join(__dirname, 'public')));
+
+// // Enable post data for request
+// app.use(bodyParser.urlencoded({extended: true}));
+
+// // Enable flash messages
+// app.use(connectFlash());
+
+// // Config cookie parser
+// app.use(cookieParser());
+
+// // Config passport js
+// app.use(passport.initialize());
+// app.use(passport.session());
+
+// // Init all router
+// initRouters(app);
+
+// app.listen(process.env.APP_PORT , process.env.APP_HOST , () =>  {
+//     console.log(`Xin chao Duc Manh, server running at ${process.env.APP_HOST }:${process.env.APP_PORT }`);
+// });
