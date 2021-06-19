@@ -1,39 +1,42 @@
 export const transValidation = {
-    email_incorrect: "Email phai co dang example@abc.com",
-    gender_incorrect: "Sai gioi tinh",
-    password_incorrect: "Mat khau phai chua it nhat 8 ky tu, bao gom chu hoa, chu thuong, chu so va ky tu dac biet",
-    passsword_confirmation_incorrect: "Mat khau nhap lai khong khop"
+    email_incorrect: "Email phải có dạng example@abc.com",
+    gender_incorrect: "Sai giới tính",
+    password_incorrect: "Mật khẩu phải chứa ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường, chữ số và ký tự đặc biệt",
+    passsword_confirmation_incorrect: "Mật khẩu nhập lại không khớp"
 };
 
 export const transErrors = {
-    account_in_use: "Email nay da duoc su dung.",
-    account_removed: "Email nay da bi xoa.",
-    account_not_active: "Email nay chua duoc kich hoat.",
-    token_undefined: "Token khong ton tai",
-    login_failed: "Sai tai khoan hoac mat khau!",
-    server_error: "Server dang bi loi, thu lai sau.",
+    account_in_use: "Email này đã được sử dụng.",
+    account_removed: "Email này đã bị xóa.",
+    account_not_active: "Email này chưa được kích hoạt.",
+    token_undefined: "Token không tồn tại",
+    login_failed: "Sai tài khoản hoặc mật khẩu!",
+    server_error: "Server đang bị lỗi, thử lại sau.",
+    avatar_type: "Kiếu file không hợp lệ, chỉ chấp nhận jpg & png.",
+    avatar_size: "Ảnh upload tối đa là 1MB.",
 };
 
 export const transSuccess = {
     userCreated: (userEmail) => {
-        return `Tai khoan <strong>${userEmail}</strong> da duoc tao, vui long kiem tra lai Email cua ban de active tai khoan truoc khi dang nhap`;
+        return `Tài khoản <strong>${userEmail}</strong> đã được tạo, vui lòng kiểm tra lại Email của bạn để active tài khoản trước khi đăng nhập`;
     },
-    account_actived: "Kich hoat tai khoan thanh cong, ban da co the dang nhap vao ung dung.",
+    account_actived: "Kích hoạt tài khoản thành công, bạn đã có thể đăng nhập vào ứng dụng.",
     loginSuccess: (username) => {
-        return `Xin chao ${username}, chuc ban mot ngay tot lanh! `
+        return `Xin chào ${username}, chúc bạn một ngày tốt lành! `
     },
-    logout_success: "Dang xuat tai khoan thanh cong.",
+    logout_success: "Đăng xuất tài khoản thành công.",
+    avatar_updated: "Cập nhật ảnh đại diện thành công.",
 };
 
 export const transMail = {
-    subject: "Awesome Chat: Xac nhan kich hoat tai khoan.",
+    subject: "Awesome Chat by @nddmanh: Xác nhận kích hoạt tài khoản.",
     template: (linkVerify) => {
         return `
-            <h2> Ban nhan duoc email nay vi da dang ky tai khoan tren ung dung Awesome chat </h2>
-            <h3> Vui long click vao lien ket ben duoi de xac nhan kich hoat tai khoan </h3>
+            <h2> Bạn nhận được Email này vì đã đăng ký tài khoản trên Awesome chat </h2>
+            <h3> Vui lòng click vào link bên dưới để xác nhận kích hoạt tài khoản </h3>
             <h3> ${linkVerify} </h3>
-            <h4> Neu cam thay email nay nham lan hay bo qua no. Tran trong hehe </h4>
+            <h4> Nếu cảm thấy email này nhầm lẫn, hãy bỏ qua nó. Trân trọng! </h4>
         `;
     },
-    send_failed: "Xay ra loi trong qua trinh gui Email. Vui long lien he voi bo phan ky thuat de duoc ho tro."
+    send_failed: "Xảy ra lỗi trong quá trình gửi Email. Vui lòng liên hệ với @nddmanh để được hỗ trợ."
 };

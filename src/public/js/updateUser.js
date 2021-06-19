@@ -83,22 +83,38 @@ $(document).ready(function () {
             cache: false,
             contentType: false,
             processData: false,
-            data: "userAvatar",
+            data: userAvatar,
             success: function (result) {
-                //
+                console.log(result);
+                //Display Success
+                $(".user-modal-alert-success").find("span").text(result.message);
+                $(".user-modal-alert-success").css("display", "block");
+
+                // Update avatar at navbar
+                $("#navbar-avatar").attr("src", result.imageSrc);
+
+                // Update origin avatar src
+                originAvatarSrc = result.imageSrc;
+
+                // reset all
+                $("#input-btn-cancel-update-user").click();
             },
             error: function (error) {
-                //
+                //Display Error
+                $(".user-modal-alert-error").find("span").text(error.responseText);
+                $(".user-modal-alert-error").css("display", "block");
+
+                // reset all
+                $("#input-btn-cancel-update-user").click();
             },
         });
 
-        // console.log(userAvatar);
-        // console.log(userInfo);
     });
     
     $("#input-btn-cancel-update-user").bind("click", function (e) {
         userAvatar = null;
         userInfo = {};
+        $("#input-change-avatar").val(null);
         $("#user-modal-avatar").attr("src", originAvatarSrc);
     });
 });
