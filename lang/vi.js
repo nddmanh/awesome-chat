@@ -1,7 +1,7 @@
 export const transValidation = {
     email_incorrect: "Email phải có dạng example@abc.com",
     gender_incorrect: "Sai giới tính",
-    password_incorrect: "Mật khẩu phải chứa ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường, chữ số và ký tự đặc biệt",
+    password_incorrect: "Mật khẩu phải chứa ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường, chữ số và ký tự đặc biệt.",
     passsword_confirmation_incorrect: "Mật khẩu nhập lại không khớp",
     update_username: "Username giới hạn trong khoảng 3 - 17 ký tự và không được phép chứa những ký tự đặc biệt.",
     update_gender: "Oops! Dữ liệu giới tính có vấn đề, đừng có nghịch ngợm nhé!",
@@ -13,11 +13,13 @@ export const transErrors = {
     account_in_use: "Email này đã được sử dụng.",
     account_removed: "Email này đã bị xóa.",
     account_not_active: "Email này chưa được kích hoạt.",
+    account_undefined: "Tài khoản này không tồn tại.",
     token_undefined: "Token không tồn tại",
     login_failed: "Sai tài khoản hoặc mật khẩu!",
     server_error: "Server đang bị lỗi, thử lại sau.",
     avatar_type: "Kiếu file không hợp lệ, chỉ chấp nhận jpg & png.",
     avatar_size: "Ảnh upload tối đa là 1MB.",
+    user_current_password_failed: "Mật khẩu hiện tại không chính xác.",
 };
 
 export const transSuccess = {
@@ -30,6 +32,7 @@ export const transSuccess = {
     },
     logout_success: "Đăng xuất tài khoản thành công.",
     user_info_updated: "Cập nhật thông tin người dùng thành công.",
+    user_password_update: "Cập nhật mật khẩu thành công!",
 };
 
 export const transMail = {
