@@ -32,7 +32,7 @@ let initPassportGoogle = () => {
             let newUserItem = {
                 username: profile.displayName,
                 gender: profile.gender,
-                local: {isAtive: true},
+                local: {isActive: true},
                 google: {
                     uid: profile.id,
                     token: accessToken,

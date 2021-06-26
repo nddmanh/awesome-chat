@@ -32,7 +32,7 @@ let initPassportFacebook = () => {
             let newUserItem = {
                 username: profile.displayName,
                 gender: profile.gender,
-                local: {isAtive: true},
+                local: {isActive: true},
                 facebook: {
                     uid: profile.id,
                     token: accessToken,
