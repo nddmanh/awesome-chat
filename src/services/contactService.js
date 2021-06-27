@@ -17,9 +17,36 @@ let findUsersContact = (currentUserId, keyword) => {
         let users = await UserModel.findAllForAddContact(deprecatedUserIds, keyword);
         resolve(users);
     });
-    
+}
+
+let addNew = (currentUserId, contactId) => {
+    return new Promise( async (resolve, reject) => {
+        let contactExists = await ContactModel.checkExists(currentUserId, contactId);
+        if (contactExists) {
+            return reject(false);
+        }
+
+        let newContactItem = {
+            userId: currentUserId,
+            contactId: contactId,
+        }
+        let newContact = ContactModel.createNew(newContactItem);
+        resolve(newContact);
+    });
+}
+
+let removeRequestContact = (currentUserId, contactId) => {
+    return new Promise( async (resolve, reject) => {
+        let removeReq = await ContactModel.removeRequestContact(currentUserId, contactId);
+        if (removeReq.result.n === 0) {
+            return reject(false);
+        }
+        resolve(true);
+    });
 }
 
 module.exports = {
     findUsersContact: findUsersContact,
+    addNew: addNew,
+    removeRequestContact: removeRequestContact,
 }
