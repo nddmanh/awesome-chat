@@ -1,6 +1,6 @@
-import { resolve, reject } from "bluebird";
 import UserModel from "./../models/userModel";
 import ContactModel from "./../models/contactModel";
+import NotificationModel from "./../models/notificationModel";
 import _ from "lodash";
 
 let findUsersContact = (currentUserId, keyword) => {
@@ -26,11 +26,21 @@ let addNew = (currentUserId, contactId) => {
             return reject(false);
         }
 
+        // Create contact
         let newContactItem = {
             userId: currentUserId,
             contactId: contactId,
         }
         let newContact = ContactModel.createNew(newContactItem);
+
+        // Create Notification
+        let notificationItem = {
+            senderId: currentUserId,
+            receiverId: contactId,
+            type: NotificationModel.types.ADD_CONTACT,
+        }
+        await NotificationModel.model.createNew(notificationItem);
+
         resolve(newContact);
     });
 }
@@ -41,6 +51,10 @@ let removeRequestContact = (currentUserId, contactId) => {
         if (removeReq.result.n === 0) {
             return reject(false);
         }
+        // Remove notification
+        let notifTypeAddContact = NotificationModel.types.ADD_CONTACT
+        await NotificationModel.model.removeRequestContactNotification(currentUserId, contactId, notifTypeAddContact);
+
         resolve(true);
     });
 }
