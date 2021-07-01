@@ -10,7 +10,6 @@ let configSocketIo = (io, cookieParser, sessionStore ) => {
             if (!data.user.logged_in) {
                 return accept("Invalid user.", false);
             }
-            console.log("successful connection to socket.io");
             return accept(null, true);
         },
         fail: (data, message, error, accept) => {
