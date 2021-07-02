@@ -20,8 +20,8 @@ function removeRequestContact() {
 }
 
 socket.on("response-remove-request-contact", function (user) {
-    $(".noti_content").find(`span[data-uid="${user.id}"]`).remove();
-
+    $(".noti_content").find(`div[data-uid="${user.id}"]`).remove();  // popup notification
+    $("ul.list-notifications").find(`li>div[data-uid="${user.id}"]`).parent().remove();  // Modal notificaiton
     // Xoa o modal yeu cua ket ban
     
     decreaseNumberNotiContact("count-request-contact-received");
