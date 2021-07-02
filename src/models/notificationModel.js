@@ -26,7 +26,7 @@ NotificationSchema.statics = {
     },
 
     /**
-     * 
+     * Get by userId and limit
      * @param {string} userId 
      * @param {number} limit 
      */
@@ -45,6 +45,17 @@ NotificationSchema.statics = {
                 {"isRead": false},
             ]
         }).exec();
+    },
+
+    /**
+     * Read more notifications 
+     * @param {string} userId 
+     * @param {number} skip 
+     * @param {number} limit 
+     * @returns 
+     */
+    readMore(userId, skip, limit) {
+        return this.find({"receiverId": userId}).sort({"createdAt": -1}).skip(skip ).limit(limit).exec();
     },
 
 }

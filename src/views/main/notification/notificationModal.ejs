@@ -13,24 +13,22 @@
                     </a>
                 </div>
                 <hr>
-                
-                <ul class="list-notifications">
 
+                <ul class="list-notifications">
                     <% notifications.forEach( function(notification) { %>
                         <li>
                             <%- notification %>
                         </li>
                     <% }); %>
-
-                    <hr>
-
-                    <div class="read-more-notif">
-                        <a href="javascript:void(0)" id="link-read-more-notif">
-                            <strong>Xem thêm 10 thông báo.</strong> 
-                        </a>
-                    </div>
-                    
                 </ul>
+                
+                <hr>
+                <div class="read-more-notif">
+                    <a href="javascript:void(0)" id="link-read-more-notif">
+                        <strong>Xem thêm 10 thông báo.</strong> 
+                    </a>
+                    <div class="read-more-notif-loader"><div></div><div></div><div></div><div></div></div>
+                </div>
             </div>
         </div>
     </div>
