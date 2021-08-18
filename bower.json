@@ -1,8 +1,8 @@
 {
     "name": "awesome-chat",
-    "homepage": "https://trungquandev.com",
+    "homepage": "https://nddmanh.com",
     "authors": [
-    "trungquan17 <quanlightning17@gmail.com>"
+    "nddmanh"
     ],
     "description": "Manage frontend libraries.",
     "main": "src/server.js",
