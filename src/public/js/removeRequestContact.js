@@ -11,6 +11,9 @@ function removeRequestContact() {
                     $("#find-user").find(`div.user-add-new-contact[data-uid = ${targetId}]`).css("display", "inline-block");
                     decreaseNumberNotiContact("count-request-contact-sent");
 
+                    // Xóa ở Modal tab đang chờ xác nhận
+                    $("#request-contact-sent").find(`li[data-uid = ${targetId}]`).remove();
+
                     socket.emit("remove-request-contact", {contactId: targetId});
 
                 }
@@ -22,7 +25,9 @@ function removeRequestContact() {
 socket.on("response-remove-request-contact", function (user) {
     $(".noti_content").find(`div[data-uid="${user.id}"]`).remove();  // popup notification
     $("ul.list-notifications").find(`li>div[data-uid="${user.id}"]`).parent().remove();  // Modal notificaiton
-    // Xoa o modal yeu cua ket ban
+
+    // Xóa ở Modal tab yêu cầu kết bạn
+    $("#request-contact-received").find(`li[data-uid = ${user.id}]`).remove();
     
     decreaseNumberNotiContact("count-request-contact-received");
     
