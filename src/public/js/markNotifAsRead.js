@@ -16,7 +16,6 @@ function markNotificationsAsRead(targetUsers) {
 }
 
 $(document).ready(function () {
-    console.log("helo");
     // Link at popup notifications
     $("#popup-mark-noti-as-read").bind("click", function () {
         let targetUsers = [];

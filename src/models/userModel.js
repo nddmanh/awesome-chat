@@ -94,6 +94,10 @@ UserSchema.statics = {
             ]
         }, {_id: 1, username: 1, address: 1, avatar: 1}).exec();
     },
+    
+    getNormalUserDataById(id) {
+        return this.findById(id, {_id: 1, username: 1, address: 1, avatar: 1}).exec();
+    },
 };
 
 UserSchema.methods = {
