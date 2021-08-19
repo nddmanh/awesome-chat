@@ -196,9 +196,8 @@ label:focus,
 .contactPanel .user-add-new-contact,
 .contactPanel .user-talk,
 .contactPanel .user-remove-contact,
-.contactPanel .user-remove-request-contact,
+.contactPanel .user-remove-request-contact-sent,
 .contactPanel .user-acccept-contact-received,
-.contactPanel .user-remove-request-sent,
 .contactPanel .user-reject-request-contact-received {
   box-sizing: border-box;
   display: inline-flex;
@@ -228,7 +227,7 @@ label:focus,
   margin: 10px 0px 5px 2px;
 }
 
-.contactPanel .user-remove-request-contact {
+.contactPanel .user-remove-request-contact-sent {
   display: none;
 }
 
@@ -1450,15 +1449,15 @@ label:focus,
   }
 }
 
-/* read-more-contacts-received-loader */
-.read-more-contacts-received-loader {
+/* read-more-contacts-sent-loader */
+.read-more-contacts-sent-loader {
   display: none;
   position: relative;
   width: 80px;
   height: 80px;
   margin-top: -25px;
 }
-.read-more-contacts-received-loader div {
+.read-more-contacts-sent-loader div {
   position: absolute;
   top: 33px;
   width: 13px;
@@ -1467,23 +1466,23 @@ label:focus,
   background: #16a085;
   animation-timing-function: cubic-bezier(0, 1, 1, 0);
 }
-.read-more-contacts-received-loader div:nth-child(1) {
+.read-more-contacts-sent-loader div:nth-child(1) {
   left: 8px;
-  animation: read-more-contacts-received-loader1 0.6s infinite;
+  animation: read-more-contacts-sent-loader1 0.6s infinite;
 }
-.read-more-contacts-received-loader div:nth-child(2) {
+.read-more-contacts-sent-loader div:nth-child(2) {
   left: 8px;
-  animation: read-more-contacts-received-loader2 0.6s infinite;
+  animation: read-more-contacts-sent-loader2 0.6s infinite;
 }
-.read-more-contacts-received-loader div:nth-child(3) {
+.read-more-contacts-sent-loader div:nth-child(3) {
   left: 32px;
-  animation: read-more-contacts-received-loader2 0.6s infinite;
+  animation: read-more-contacts-sent-loader2 0.6s infinite;
 }
-.read-more-contacts-received-loader div:nth-child(4) {
+.read-more-contacts-sent-loader div:nth-child(4) {
   left: 56px;
-  animation: read-more-contacts-received-loader3 0.6s infinite;
+  animation: read-more-contacts-sent-loader3 0.6s infinite;
 }
-@keyframes read-more-contacts-received-loader1 {
+@keyframes read-more-contacts-sent-loader1 {
   0% {
     transform: scale(0);
   }
@@ -1491,7 +1490,7 @@ label:focus,
     transform: scale(1);
   }
 }
-@keyframes read-more-contacts-received-loader3 {
+@keyframes read-more-contacts-sent-loader3 {
   0% {
     transform: scale(1);
   }
@@ -1499,7 +1498,7 @@ label:focus,
     transform: scale(0);
   }
 }
-@keyframes read-more-contacts-received-loader2 {
+@keyframes read-more-contacts-sent-loader2 {
   0% {
     transform: translate(0, 0);
   }
@@ -1564,4 +1563,8 @@ label:focus,
   100% {
     transform: translate(24px, 0);
   }
+}
+
+.display-important {
+  display: inline-block !important;
 }
