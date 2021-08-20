@@ -68,8 +68,24 @@ ContactSchema.statics = {
             $and: [
                 {"contactId": userId},
                 {"userId": contactId},
+                {"status": false}
             ],
         }).exec();
+    },
+    
+    /**
+     * Approve contact
+     * @param {string: of currentUser} userId 
+     * @param {string} contactId 
+     */
+    approveRequestContactReceived(userId, contactId) {
+        return this.update({
+            $and: [
+                {"contactId": userId},
+                {"userId": contactId},
+                {"status": false}
+            ],
+        }, {"status": true}).exec();
     },
     
     /**
