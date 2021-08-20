@@ -1,6 +1,6 @@
-import {validationResult} from "express-validator/check";
-import {auth} from "./../services/index";
-import {transSuccess} from "./../../lang/vi";
+import { validationResult } from "express-validator/check";
+import { auth } from "./../services/index";
+import { transSuccess } from "./../../lang/vi";
 
 let getLoginRegister =  (req, res) => {
     return res.render("auth/master", {

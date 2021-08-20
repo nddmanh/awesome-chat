@@ -19,7 +19,7 @@ let findUsersContact = (currentUserId, keyword) => {
         let users = await UserModel.findAllForAddContact(deprecatedUserIds, keyword);
         resolve(users);
     });
-}
+};
 
 let addNew = (currentUserId, contactId) => {
     return new Promise( async (resolve, reject) => {
@@ -45,7 +45,7 @@ let addNew = (currentUserId, contactId) => {
 
         resolve(newContact);
     });
-}
+};
 
 let removeRequestContactSent = (currentUserId, contactId) => {
     return new Promise( async (resolve, reject) => {
@@ -59,7 +59,21 @@ let removeRequestContactSent = (currentUserId, contactId) => {
 
         resolve(true);
     });
-}
+};
+
+let removeRequestContactReceived = (currentUserId, contactId) => {
+    return new Promise( async (resolve, reject) => {
+        let removeReq = await ContactModel.removeRequestContactReceived(currentUserId, contactId);
+        if (removeReq.result.n === 0) {
+            return reject(false);
+        }
+        // Remove notification: Thuc hien sau
+        // let notifTypeAddContact = NotificationModel.types.ADD_CONTACT
+        // await NotificationModel.model.removeRequestContactReceivedNotification(currentUserId, contactId, notifTypeAddContact);
+
+        resolve(true);
+    });
+};
 
 let getContacts = (currentUserId) => {
     return new Promise( async (resolve, reject) => {
@@ -78,7 +92,7 @@ let getContacts = (currentUserId) => {
             reject(error)
         }
     });
-}
+};
 
 let getContactsSent = (currentUserId) => {
     return new Promise( async (resolve, reject) => {
@@ -93,7 +107,7 @@ let getContactsSent = (currentUserId) => {
             reject(error)
         }
     });
-}
+};
 
 let getContactsReceived = (currentUserId) => {
     return new Promise( async (resolve, reject) => {
@@ -108,7 +122,7 @@ let getContactsReceived = (currentUserId) => {
             reject(error)
         }
     });
-}
+};
 
 let countAllContacts = (currentUserId) => {
     return new Promise( async (resolve, reject) => {
@@ -214,6 +228,7 @@ module.exports = {
     findUsersContact: findUsersContact,
     addNew: addNew,
     removeRequestContactSent: removeRequestContactSent,
+    removeRequestContactReceived: removeRequestContactReceived,
     getContacts: getContacts,
     getContactsSent: getContactsSent,
     getContactsReceived:getContactsReceived,
