@@ -339,13 +339,13 @@ $(document).ready(function () {
             cancelButtonColor: "#FF7675",
             confirmButtonText: "Xác nhận",
             cancelButtonText: "Hủy",
-          }).then((result) => {
+        }).then((result) => {
                 if (!result.value) {
                     $("#input-btn-cancel-update-user-password").click();
                 return false;
             }
             callUpdateUserPassword();
-          });
+        });
     });
 
     $("#input-btn-cancel-update-user-password").bind("click", function (e) {

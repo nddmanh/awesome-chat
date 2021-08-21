@@ -40,6 +40,9 @@ $(document).ready(function () {
                             </div>
                         </li>`);
                 });
+
+                removeContact(); // js/removeContact.js
+
                 $("#link-read-more-contacts").css("display", "inline-block");
                 $(".read-more-contacts-loader").css("display", "none");
             });

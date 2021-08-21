@@ -29,6 +29,11 @@ ContactSchema.statics = {
         });
     },
 
+    /**
+     * Check exists of 2 user
+     * @param {string} userId 
+     * @param {string} contactId 
+     */
     checkExists(userId, contactId) {
         return this.findOne({
             $or: [
@@ -39,6 +44,28 @@ ContactSchema.statics = {
                 {$and:[
                     {"userId": contactId},
                     {"contactId": userId},
+                ]},
+            ]
+        }).exec();
+    },
+
+    /**
+     * Remove contact
+     * @param {string} userId 
+     * @param {string} contactId 
+     */
+    removeContact(userId, contactId) {
+        return this.remove({
+            $or: [
+                {$and:[
+                    {"userId": userId},
+                    {"contactId": contactId},
+                    {"status": true}
+                ]},
+                {$and:[
+                    {"userId": contactId},
+                    {"contactId": userId},
+                    {"status": true}
                 ]},
             ]
         }).exec();
