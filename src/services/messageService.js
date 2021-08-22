@@ -16,13 +16,11 @@ let getAllConversationItems = (currentUserId) => {
             let userConversationsPromise = contacts.map( async (contact) => {
                 if (contact.contactId == currentUserId) {
                     let getUserContact = await UserModel.getNormalUserDataById(contact.userId);
-                    getUserContact.createdAt = getUserContact.toObject();
-                    getUserContact.createdAt = contact.createdAt;
+                    getUserContact.updatedAt = contact.updatedAt;
                     return getUserContact;
                 } else {
                     let getUserContact = await UserModel.getNormalUserDataById(contact.contactId);
-                    getUserContact.createdAt = getUserContact.toObject();
-                    getUserContact.createdAt = contact.createdAt;
+                    getUserContact.updatedAt = contact.updatedAt;
                     return getUserContact;
                 }
             });
@@ -32,7 +30,7 @@ let getAllConversationItems = (currentUserId) => {
             let allConversations = userConversations.concat(groupConversations);
             
             allConversations = _.sortBy(allConversations, (item) => {
-                return -item.createdAt;
+                return -item.updatedAt;
             });
 
             resolve({

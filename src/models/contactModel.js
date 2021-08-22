@@ -7,8 +7,8 @@ let ContactSchema = new Schema({
     contactId: String,
     status: {type: Boolean, default: false},
     createdAt: {type: Number, default: Date.now},
-    updateAt: {type: Number, default: null},
-    deleteAt: {type: Number, default: null}
+    updatedAt: {type: Number, default: null},
+    deletedAt: {type: Number, default: null}
 });
 
 ContactSchema.statics = {
@@ -112,7 +112,10 @@ ContactSchema.statics = {
                 {"userId": contactId},
                 {"status": false}
             ],
-        }, {"status": true}).exec();
+        }, {
+            "status": true,
+            "updatedAt": Date.now()
+        }).exec();
     },
     
     /**
@@ -129,7 +132,7 @@ ContactSchema.statics = {
                 ]},
                 {"status": true}
             ]
-        }).sort({ "createdAt": -1 }).limit(limit).exec();
+        }).sort({ "updatedAt": -1 }).limit(limit).exec();
     },
     
     /**
@@ -217,7 +220,7 @@ ContactSchema.statics = {
                 ]},
                 {"status": true}
             ]
-        }).sort({ "createdAt": -1 }).skip(skip).limit(limit).exec();
+        }).sort({ "updatedAt": -1 }).skip(skip).limit(limit).exec();
     },
 
     /**

@@ -27,8 +27,8 @@ let UserSchema = new Schema({
         email: {type: String, trim: true}
     },
     createdAt: {type: Number, default: Date.now},
-    updateAt: {type: Number, default: null},
-    deleteAt: {type: Number, default: null}
+    updatedAt: {type: Number, default: null},
+    deletedAt: {type: Number, default: null}
 });
 
 UserSchema.statics = {
