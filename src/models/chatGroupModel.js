@@ -7,12 +7,25 @@ let ChatGroupSchema = new Schema({
     userAmount: {type: Number, min: 3, max: 100},
     messageAmount: {type: Number, default: 0},
     userId: String,
-    member: [
+    members: [
         {userId: String}
     ],
     createdAt: {type: Number, default: Date.now},
     updateAt: {type: Number, default: null},
     deleteAt: {type: Number, default: null}
 });
+
+ChatGroupSchema.statics = {
+    /**
+     * get chat group items by userId and limit
+     * @param {string} userId currentUserId
+     * @param {number} limit 
+     */
+    getChatGroups (userId, limit) {
+        return this.find({
+            "members": {$elemMatch: {"userId": userId}}
+        }).sort({"createdAt": -1}).limit(limit).exec();
+    }
+}
 
 module.exports = mongoose.model("chat-group", ChatGroupSchema);

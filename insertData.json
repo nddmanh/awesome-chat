@@ -1,0 +1,14 @@
+{
+    "name": "Hoc node js",
+    "userAmount": 17,
+    "messageAmount": 0,
+    "userId": "60cb4a09fcfb7c2610c172f0",
+    "member": [
+        {"userId": "60cb4a09fcfb7c2610c172f0"},
+        {"userId": "60d765e26dd5241c0870f57c"},
+        {"userId": "60cc464162dd7e22e8b4c792"}
+    ],
+    "createdAt": 1629639671719,
+    "updatedAt": null,
+    "deletedAt": null
+}
