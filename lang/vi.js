@@ -8,6 +8,7 @@ export const transValidation = {
     update_address: "Địa chỉ giới hạn trong khoảng 3-30 ký tự.",
     update_phone: "Số điện thoại bắt đầu bằng số 0 và chỉ có 10 ký tự.",
     keyword_find_user: "Tên người dùng không chứa những ký tự đặc biệt.",
+    message_text_emoji_incorrect: "Tin nhắn không hợp lệ. Đảm bảo tối thiểu 1 ký tự, tối đa 400 ký tự.",
 };
 
 export const transErrors = {
@@ -21,6 +22,7 @@ export const transErrors = {
     avatar_type: "Kiếu file không hợp lệ, chỉ chấp nhận jpg & png.",
     avatar_size: "Ảnh upload tối đa là 1MB.",
     user_current_password_failed: "Mật khẩu hiện tại không chính xác.",
+    conversation_not_found: "Cuộc trò chuyện không tồn tại",
 };
 
 export const transSuccess = {

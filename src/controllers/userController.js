@@ -1,10 +1,10 @@
 import multer from "multer";
-import {app} from "./../config/app";
-import {transErrors, transSuccess} from "./../../lang/vi";
+import { app } from "./../config/app";
+import { transErrors, transSuccess } from "./../../lang/vi";
 import uuidv4 from "uuid/v4";
-import {user} from "./../services/index";
+import { user } from "./../services/index";
 import fsExtra from "fs-extra";
-import {validationResult} from "express-validator/check";
+import { validationResult } from "express-validator/check";
 
 let storageAvatar = multer.diskStorage({
     destination: (req, file, callback) => {

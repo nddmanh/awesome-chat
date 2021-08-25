@@ -1,4 +1,4 @@
-import {notification} from "./../services/index";
+import { notification } from "./../services/index";
 
 let readMore = async (req, res) => {
     try {

@@ -4,9 +4,9 @@ function textAndEmojiChat(divId) {
             let targetId = $(`#write-chat-${divId}`).data("chat");
             let messageVal = $(`#write-chat-${divId}`).val();
 
-            if (!targetId.length || !messageVal.length) {
-                return false;
-            };
+                if (!targetId.length || !messageVal.length) {
+                    return false;
+                };
 
             let dataTextEmojiForSend = {
                 uid: targetId,
@@ -20,8 +20,9 @@ function textAndEmojiChat(divId) {
             // Call send message
             $.post("/message/add-new-text-emoji", dataTextEmojiForSend, function (data) {
                 // success
+                console.log(data.message);
             }).fail(function (response) {
-                // Error
+                alertify.notify(response.responseText, "error", 7);
             });
         }
     });
