@@ -25,8 +25,8 @@ function nineScrollRight(divId) {
   $(`.right .chat[data-chat = ${divId}]`).scrollTop($(`.right .chat[data-chat = ${divId}]`)[0].scrollHeight);
 }
 
-function enableEmojioneArea(chatId) {
-  $('.write-chat[data-chat="' + chatId + '"]').emojioneArea({
+function enableEmojioneArea(divId) {
+  $(`#write-chat-${divId}`).emojioneArea({
     standalone: false,
     pickerPosition: 'top',
     filtersPosition: 'bottom',
@@ -38,7 +38,10 @@ function enableEmojioneArea(chatId) {
     shortnames: false,
     events: {
       keyup: function(editor, event) {
-        $('.write-chat').val(this.getText());
+        $(`#write-chat-${divId}`).val(this.getText());
+      },
+      click: function () {
+        textAndEmojiChat(divId);
       }
     },
   });
@@ -109,8 +112,6 @@ function gridPhotos(layoutNumber) {
       }
     });
   });
-
-  
 }
 
 function addFriendsToGroup() {
@@ -170,6 +171,9 @@ function changeScreenChat() {
     // Cau hinh thanh cuon ben box chat rightSide.ejs moi khi click chuot vao cuoc tro chuyen cu the
     let divId = $(this).find("li").data("chat");
     nineScrollRight(divId);
+
+    // Bật emoji, tham số truyền vào là id của box nhập nội dung tin nhắn
+    enableEmojioneArea(divId);
   })
 }
 
@@ -182,9 +186,6 @@ $(document).ready(function() {
 
   // Cấu hình thanh cuộn
   nineScrollLeft();
-
-  // Bật emoji, tham số truyền vào là id của box nhập nội dung tin nhắn
-  enableEmojioneArea("17071995");
 
   // Icon loading khi chạy ajax
   ajaxLoading();
