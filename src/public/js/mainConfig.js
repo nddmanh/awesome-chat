@@ -165,18 +165,28 @@ function changeTypeChat() {
 }
 
 function changeScreenChat() {  
-  $(".room-chat").unbind("click").on("click", function () {  
+  $(".room-chat").unbind("click").on("click", function () {
+    let divId = $(this).find("li").data("chat");
+
     $(".person").removeClass("active");
-    $(this).find("li").addClass("active");
+    $(`.person[data-chat=${divId}]`).addClass("active");
+
     $(this).tab("show");
 
     // Cau hinh thanh cuon ben box chat rightSide.ejs moi khi click chuot vao cuoc tro chuyen cu the
-    let divId = $(this).find("li").data("chat");
     nineScrollRight(divId);
 
     // Bật emoji, tham số truyền vào là id của box nhập nội dung tin nhắn
     enableEmojioneArea(divId);
   })
+}
+
+function convertEmoji() {
+  $(".convert-emoji").each(function () {
+    var original = $(this).html();
+    var converted = emojione.toImage(original);
+    $(this).html(converted);
+  });
 }
 
 $(document).ready(function() {
@@ -211,6 +221,10 @@ $(document).ready(function() {
   // Thay doi man hinh chat
   changeScreenChat();
 
+  // Convert cac unicode thanh bieu tuong cam xuc
+  convertEmoji();
+  
   // Click vao phan tu dau tien cua cuoc tro chuyen
   $("ul.people").find("a")[0].click();
+
 });

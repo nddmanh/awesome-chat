@@ -1,22 +1,22 @@
 {
-    "name": "awesome-chat",
-    "homepage": "https://nddmanh.com",
-    "authors": [
+  "name": "awesome-chat",
+  "homepage": "https://nddmanh.com",
+  "authors": [
     "nddmanh"
-    ],
-    "description": "Manage frontend libraries.",
-    "main": "src/server.js",
-    "license": "",
-    "private": true,
-    "ignore": [
+  ],
+  "description": "Manage frontend libraries.",
+  "main": "src/server.js",
+  "license": "",
+  "private": true,
+  "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
     "test",
     "tests"
-    ],
-    "dependencies": {
-    "bower_components": "https://github.com/trungquan17/awesome-chat-third-party-libraries.git"
-    }
+  ],
+  "dependencies": {
+    "bower_components": "https://github.com/trungquan17/awesome-chat-third-party-libraries.git",
+    "emojione": "^4.5.0"
+  }
 }
-  
