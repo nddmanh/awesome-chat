@@ -66,10 +66,10 @@ function textAndEmojiChat(divId) {
                 typingOff(divId);
 
                 // Step 8: If this has typing, remove that immediate
-                // let checkTyping = $(`.chat[data-chat=${response.currentGroupId}]`).find("div.bubble-typing-gif");
-                // if (checkTyping.length) {
-                //     checkTyping.remove();
-                // }
+                let checkTyping = $(`.chat[data-chat=${divId}]`).find("div.bubble-typing-gif");
+                if (checkTyping.length) {
+                    checkTyping.remove();
+                }
             }).fail(function (response) {
                 alertify.notify(response.responseText, "error", 7);
             });

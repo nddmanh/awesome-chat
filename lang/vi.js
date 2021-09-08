@@ -23,6 +23,8 @@ export const transErrors = {
     avatar_size: "Ảnh upload tối đa là 1MB.",
     user_current_password_failed: "Mật khẩu hiện tại không chính xác.",
     conversation_not_found: "Cuộc trò chuyện không tồn tại",
+    image_message_type: "Kiếu file không hợp lệ, chỉ chấp nhận jpg & png.",
+    image_message_size: "Ảnh upload tối đa là 1MB.",
 };
 
 export const transSuccess = {
