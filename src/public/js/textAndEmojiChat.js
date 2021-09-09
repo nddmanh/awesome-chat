@@ -79,7 +79,6 @@ function textAndEmojiChat(divId) {
 
 $(document).ready(function () {
     socket.on("response-chat-text-emoji", function (response) {
-        console.log(response);
         let divId = "";
         // Step 1: handle message data before show
         let messageOfYou = $(`<div class="bubble you" data-mess-id="${response.message._id}"></div>`);

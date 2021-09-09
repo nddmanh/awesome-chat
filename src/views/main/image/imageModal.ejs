@@ -8,7 +8,6 @@
                 </div>
                 <div class="modal-body">
                     <div class="all-images" style="visibility: hidden;">
-                        <img src="images/users/default-avatar-trungquandev-01.jpg">
                         <% conversation.messages.forEach(function(message) { %>
                             <% if (message.messageType === "image") { %>
                                 <img src="data:<%= message.file.contentType %>; base64, <%= bufferToBase64(message.file.data) %>">
