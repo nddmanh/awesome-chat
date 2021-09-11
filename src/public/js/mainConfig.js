@@ -198,6 +198,9 @@ function changeScreenChat() {
 
     // Bat lang nghe DOM cho viec chat tin nhan file
     attachmentChat(divId);
+
+    // Bat lang nghe DOM cho viec call video
+    videoChat(divId);
   })
 }
 
@@ -251,4 +254,7 @@ $(document).ready(function() {
   // Click vao phan tu dau tien cua cuoc tro chuyen
   $("ul.people").find("a")[0].click();
 
+  $("#video-chat-group").bind("click", function () {
+    alertify.notify("Tính năng này không khả dụng với nhóm trò chuyện.", "error", 7);
+  });
 });
