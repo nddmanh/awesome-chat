@@ -31,12 +31,15 @@ $(document).ready(function () {
         alertify.notify("Người dùng không online.", "error", 7);
     });
     
+    let iceServerList = $("#ice-server-list").val();
+
     let getPeerId = "";
     const peer = new Peer({
         key: "peerjs",
         host: "peerjs-server-trungquandev.herokuapp.com",
         secure: true,
         port: 443,
+        config: {"iceServers": JSON.parse(iceServerList)},
         debug: 3
     });
     peer.on("open", function (peerId) {
@@ -91,7 +94,7 @@ $(document).ready(function () {
                     // Step 07 of caller
                     socket.emit("caller-cancel-request-call-to-server", dataToEmit);
                 });
-
+                
                 if (Swal.getHtmlContainer().querySelector !== null) {
                     Swal.showLoading()
                     timerInterval = setInterval(() => {
@@ -202,8 +205,6 @@ $(document).ready(function () {
 
     // Step 13 of caller
     socket.on("server-send-accept-call-to-caller", function(response) {
-        console.log("da nhan dc emit nay 1 caller");
-
         Swal.close();
         clearInterval(timerInterval);
         let getUserMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia).bind(navigator);
@@ -249,7 +250,6 @@ $(document).ready(function () {
 
     // Step 14 of listener
     socket.on("server-send-accept-call-to-listener", function(response) {
-        console.log("da nhan dc emit nay 1");
         Swal.close();
         clearInterval(timerInterval);
 
