@@ -16,12 +16,11 @@ function callFindUsers(e) {
             $("#find-user ul").html(data);
             addContact(); // js/addContact.js
             removeRequestContactSent();
-        })
-
+        });
     }
 }
 
 $(document).ready(function () {
-    $("#input-find-users-contact").bind("keypress", callFindUsers );
-    $("#btn-find-users-contact").bind("click", callFindUsers );
+    $("#input-find-users-contact").bind("keypress", callFindUsers);
+    $("#btn-find-users-contact").bind("click", callFindUsers);
 });

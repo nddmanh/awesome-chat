@@ -162,7 +162,7 @@ let countAllContacts = (currentUserId) => {
             reject(error)
         }
     });
-}
+};
 
 let countAllContactsSent = (currentUserId) => {
     return new Promise( async (resolve, reject) => {
@@ -173,7 +173,7 @@ let countAllContactsSent = (currentUserId) => {
             reject(error)
         }
     });
-}
+};
 
 let countAllContactsReceived = (currentUserId) => {
     return new Promise( async (resolve, reject) => {
@@ -184,7 +184,7 @@ let countAllContactsReceived = (currentUserId) => {
             reject(error)
         }
     });
-}
+};
 
 /**
  * Read more contacts, max 10 item one time
@@ -209,7 +209,7 @@ let readMoreContacts = (currentUserId, skipNumberContacts) => {
             reject(error);
         }
     }); 
-}
+};
 
 /**
  * Read more contacts sent, max 10 item one time
@@ -230,7 +230,7 @@ let readMoreContactsSent = (currentUserId, skipNumberContacts) => {
             reject(error);
         }
     }); 
-}
+};
 
 /**
  * Read more contacts received, max 10 item one time
@@ -251,7 +251,27 @@ let readMoreContactsReceived = (currentUserId, skipNumberContacts) => {
             reject(error);
         }
     }); 
-}
+};
+
+let searchFriends = (currentUserId, keyword) => {
+    return new Promise( async (resolve, reject) => {
+        let friendIds = [];
+        let friends = await ContactModel.getFriends(currentUserId);
+
+        friends.forEach((item) => {
+            friendIds.push(item.userId);
+            friendIds.push(item.contactId);
+        });
+
+        friendIds = _.uniqBy(friendIds);
+        // Delete userId to friends list
+        friendIds = friendIds.filter(userId => userId != currentUserId);
+
+        let users = await UserModel.findAllToAddGroupChat(friendIds, keyword);
+
+        resolve(users);
+    });
+};
 
 module.exports = {
     findUsersContact: findUsersContact,
@@ -268,5 +288,6 @@ module.exports = {
     countAllContactsReceived: countAllContactsReceived,
     readMoreContacts: readMoreContacts,
     readMoreContactsSent: readMoreContactsSent,
-    readMoreContactsReceived: readMoreContactsReceived    
+    readMoreContactsReceived: readMoreContactsReceived,
+    searchFriends: searchFriends
 }
