@@ -180,7 +180,6 @@ function updateUserInfo() {
             delete userUpdatePassword.confirmNewPassword;
             return false;
         }
-
         if (confirmNewPassword !== userUpdatePassword.newPassword) {
             alertify.notify("Mật khẩu nhập lại chưa chính xác.", "error", 7);
             $(this).val((null));
@@ -309,7 +308,6 @@ $(document).ready(function () {
         if (!$.isEmptyObject(userInfo)) {
             callUpdateUserInfo();
         }
-
     });
     
     $("#input-btn-cancel-update-user").bind("click", function (e) {
@@ -329,7 +327,6 @@ $(document).ready(function () {
             alertify.notify("Bạn phải nhập đầy dủ thông tin.", "error", 7);
             return false;
         }
-
         Swal.fire({
             title: "Bạn có chắc chắn thay đổi mật khẩu?",
             text: "Bạn sẽ không thể hoàn tác lại quá trình này",
@@ -340,8 +337,8 @@ $(document).ready(function () {
             confirmButtonText: "Xác nhận",
             cancelButtonText: "Hủy",
         }).then((result) => {
-                if (!result.value) {
-                    $("#input-btn-cancel-update-user-password").click();
+            if (!result.value) {
+                $("#input-btn-cancel-update-user-password").click();
                 return false;
             }
             callUpdateUserPassword();

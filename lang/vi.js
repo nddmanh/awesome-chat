@@ -9,6 +9,8 @@ export const transValidation = {
     update_phone: "Số điện thoại bắt đầu bằng số 0 và chỉ có 10 ký tự.",
     keyword_find_user: "Tên người dùng không chứa những ký tự đặc biệt.",
     message_text_emoji_incorrect: "Tin nhắn không hợp lệ. Đảm bảo tối thiểu 1 ký tự, tối đa 400 ký tự.",
+    add_new_group_users_incorrect: "Một nhóm chat có tối thiểu 3 thành viên.",
+    add_new_group_name_incorrect: "Tên cuộc trò chuyện giới hạn từ 5 đến 25 ký tự và không chứa các ký tự đặc biệt.",
 };
 
 export const transErrors = {
