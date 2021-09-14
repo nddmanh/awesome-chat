@@ -1,10 +1,9 @@
 import {pushSocketToArray, emitNotifyToArray, removeSocketIdFromArray} from "./../../helpers/socketHelper";
 /**
- * 
  * @param io from socket.io lbrary
  */
 
-let typingOff = (io) => {
+let newGroupChat = (io) => {
     let clients = {};
     io.on("connection", (socket) => {
         clients = pushSocketToArray(clients, socket.request.user._id, socket.id );
@@ -12,32 +11,22 @@ let typingOff = (io) => {
             clients = pushSocketToArray(clients, group._id, socket.id );
         });
 
-        // When has new group chat
         socket.on("new-group-created", (data) => {
             clients = pushSocketToArray(clients, data.groupChat._id, socket.id );
+
+            let response = {
+                groupChat: data.groupChat
+            };
+
+            data.groupChat.members.forEach(member => {
+                if(clients[member.userId] && member.userId != socket.request.user._id) {
+                    emitNotifyToArray(clients, member.userId, socket, "response-new-group-created", response);
+                }
+            });
         });
+
         socket.on("member-received-group-chat", (data) => {
             clients = pushSocketToArray(clients, data.groupChatId, socket.id );
-        });
-        
-        socket.on("user-is-not-typing", (data) => {
-            if (data.groupId) {
-                let response = {
-                    currentGroupId: data.groupId,
-                    currentUserId: socket.request.user._id
-                };
-                if (clients[data.groupId]) {
-                    emitNotifyToArray(clients, data.groupId, socket, "response-user-is-not-typing", response);
-                }
-            }
-            if (data.contactId) {
-                let response = {
-                    currentUserId: socket.request.user._id
-                };
-                if (clients[data.contactId]) {
-                    emitNotifyToArray(clients, data.contactId, socket, "response-user-is-not-typing", response);
-                }
-            }
         });
 
         socket.on("disconnect", () => {
@@ -49,4 +38,4 @@ let typingOff = (io) => {
     });
 }
 
-module.exports = typingOff;
+module.exports = newGroupChat;
