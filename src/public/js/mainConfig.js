@@ -4,7 +4,7 @@
 
 const socket = io();
 
-function nineScrollLeft() {
+function niceScrollLeft() {
   $('.left').niceScroll({
     smoothscroll: true,
     horizrailenabled: false,
@@ -14,7 +14,11 @@ function nineScrollLeft() {
   });
 }
 
-function nineScrollRight(divId) {
+function resizeNiceScrollLeft() {
+  $('.left').getNiceScroll().resize();
+}
+
+function niceScrollRight(divId) {
   $(`.right .chat[data-chat = ${divId}]`).niceScroll({
     smoothscroll: true,
     horizrailenabled: false,
@@ -160,7 +164,7 @@ function changeScreenChat() {
     $(this).tab("show");
 
     // Cau hinh thanh cuon ben box chat rightSide.ejs moi khi click chuot vao cuoc tro chuyen cu the
-    nineScrollRight(divId);
+    niceScrollRight(divId);
 
     // Bật emoji, tham số truyền vào là id của box nhập nội dung tin nhắn
     enableEmojioneArea(divId);
@@ -195,8 +199,8 @@ $(document).ready(function() {
   // Bật tắt popup notification
   configNotification();
 
-  // Cấu hình thanh cuộn
-  nineScrollLeft();
+  // Cấu hình thanh cuộn bên trái
+  niceScrollLeft();
 
   // Icon loading khi chạy ajax
   ajaxLoading();

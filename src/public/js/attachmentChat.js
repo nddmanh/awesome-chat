@@ -51,7 +51,7 @@ function attachmentChat(divId) {
 
                 // Step 2: append message data to screen
                 $(`.right .chat[data-chat=${divId}]`).append(messageOfMe);
-                nineScrollRight(divId);
+                niceScrollRight(divId);
 
                 // Step 3: remove  all data at input: nothing to code
 
@@ -111,7 +111,7 @@ $(document).ready(function () {
         // Step 2: append message data to screen
         if (response.currentUserId !== $("#dropdown-navbar-user").data("uid")) {
             $(`.right .chat[data-chat=${divId}]`).append(messageOfYou);
-            nineScrollRight(divId);
+            niceScrollRight(divId);
             increaseNumberMessageGroup(divId);
             $(`.person[data-chat=${divId}]`).find("span.time").addClass("message-time-realtime");
         }

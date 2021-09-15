@@ -15,7 +15,7 @@ const LIMIT_MESSAGES_TAKEN = 30;
  * @param {string} currentUserId 
  */
 let getAllConversationItems = (currentUserId) => {
-    return new Promise( async(resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
         try {
             let contacts = await ContactModel.getContacts(currentUserId, LIMIT_CONVERSATIONS_TAKEN);
             let userConversationsPromise = contacts.map( async (contact) => {
@@ -65,7 +65,7 @@ let getAllConversationItems = (currentUserId) => {
         } catch (error) {
             reject(error);
         }
-    })
+    });
 };
 
 /**
@@ -306,9 +306,70 @@ let addNewAttachment = (sender, receiverId, messageVal, isChatGroup) => {
     });
 };
 
+/**
+ * Read more personal and group chat
+ * @param {string} currentUserId 
+ * @param {number} skipPersonal 
+ * @param {number} skipGroup 
+ */
+let readMoreAllChat = (currentUserId, skipPersonal, skipGroup) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            // Handle skip personal chat
+            let contacts = await ContactModel.readMoreContacts(currentUserId, skipPersonal, LIMIT_CONVERSATIONS_TAKEN);
+            let userConversationsPromise = contacts.map( async (contact) => {
+                if (contact.contactId == currentUserId) {
+                    let getUserContact = await UserModel.getNormalUserDataById(contact.userId);
+                    getUserContact.updatedAt = contact.updatedAt;
+                    return getUserContact;
+                } else {
+                    let getUserContact = await UserModel.getNormalUserDataById(contact.contactId);
+                    getUserContact.updatedAt = contact.updatedAt;
+                    return getUserContact;
+                }
+            });
+            let userConversations = await Promise.all(userConversationsPromise);
+            
+            // Handle skip group chat
+            let groupConversations = await ChatGroupModel.readMoreChatGroup(currentUserId, skipGroup, LIMIT_CONVERSATIONS_TAKEN);
+            
+            let allConversations = userConversations.concat(groupConversations);
+            
+            allConversations = _.sortBy(allConversations, (item) => {
+                return -item.updatedAt;
+            });
+
+            // Get messages to apply in screen chat
+            let allConversationWithMessagesPromise = allConversations.map(async (conversation) => {
+                conversation = conversation.toObject();
+                if (conversation.members) {
+                    let getMessages = await MessageModel.model.getMessagesInGroup(conversation._id, LIMIT_MESSAGES_TAKEN);
+                    conversation.messages = _.reverse(getMessages);
+                } else {
+                    let getMessages = await MessageModel.model.getMessagesInPersonal(currentUserId, conversation._id, LIMIT_MESSAGES_TAKEN);
+                    conversation.messages = _.reverse(getMessages);
+                }
+                
+                return conversation;
+            });
+
+            let allConversationWithMessages = await Promise.all(allConversationWithMessagesPromise);
+            // sort by updatedAt desending
+            allConversationWithMessages = _.sortBy(allConversationWithMessages, (item) => {
+                return -item.updatedAt;
+            });
+            
+            resolve(allConversationWithMessages);
+        } catch (error) {
+            reject(error);
+        }
+    });
+}
+
 module.exports = {
     getAllConversationItems: getAllConversationItems,
     addNewTextEmoji: addNewTextEmoji,
     addNewImage: addNewImage,
-    addNewAttachment: addNewAttachment
+    addNewAttachment: addNewAttachment,
+    readMoreAllChat: readMoreAllChat
 };
