@@ -62,6 +62,38 @@ MessageSchema.statics = {
     getMessagesInGroup(receiverId, limit) {
         return this.find({"receiverId": receiverId}).sort({"createdAt": -1}).limit(limit).exec();
     },
+
+    /**
+     * Read more message in personal
+     * @param {string} senderId currentUserId 
+     * @param {string} receiverId 
+     * @param {number} skip 
+     * @param {number} limit 
+     */
+     readMoreMessagesInPersonal(senderId, receiverId, skip, limit) {
+        return this.find({
+            $or: [
+                {$and: [
+                    {"senderId": senderId},
+                    {"receiverId": receiverId},
+                ]},
+                {$and: [
+                    {"receiverId": senderId},
+                    {"senderId": receiverId}
+                ]}
+            ]
+        }).sort({"createdAt": -1}).skip(skip).limit(limit).exec();
+    },
+    
+    /**
+     * Read more message in group
+     * @param {string} receiverId 
+     * @param {number} skip
+     * @param {number} limit
+     */
+     readMoreMessagesInGroup(receiverId, skip, limit) {
+        return this.find({"receiverId": receiverId}).sort({"createdAt": -1}).skip(skip).limit(limit).exec();
+    },
 }
 
 const MESSAGE_CONVERSATION_TYPES = {

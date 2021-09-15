@@ -1655,3 +1655,8 @@ label:focus,
   color: #e74c3c !important;
   font-weight: bold;
 }
+
+.message-loading {
+  display: block;
+  margin: 0 auto;
+}
