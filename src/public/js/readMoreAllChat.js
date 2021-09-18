@@ -43,18 +43,18 @@ $(document).ready(function () {
                 // Step 09: Update online
                 socket.emit("check-status");
 
-                // Step 10: Remove loading
-                $("#link-read-more-all-chat").css("display", "inline-block");
-                $(".read-more-all-chat-loader").css("display", "none");
-
-                // Step 11: Call readMoreMessage
+                
+                // Step 10: Call readMoreMessage
                 readMoreMessage();
 
                 // Extra
                 zoomImageChat();
                 userTalk();
+                
             });
         }, 1000);
-        
+        // Step 11: Remove loading
+        $("#link-read-more-all-chat").css("display", "inline-block");
+        $(".read-more-all-chat-loader").css("display", "none");
     });
 });

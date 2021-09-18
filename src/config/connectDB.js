@@ -7,9 +7,10 @@ import bluebird from "bluebird";
 let ConnectBD = () => {
     mongoose.Promise = bluebird;
 
+    // Connect DB on local
     let URI = `${process.env.DB_CONNECTION}://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`;
-    
-    return mongoose.connect(URI, {useMongoClient: true});
+    console.log("Connected database successfully.");
+    return mongoose.connect(URI, { useMongoClient: true });
 }
 
 module.exports = ConnectBD;
