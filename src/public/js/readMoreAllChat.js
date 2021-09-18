@@ -12,8 +12,6 @@ $(document).ready(function () {
             $.get(`/message/read-more-all-chat?skipPersonal=${skipPersonal}&skipGroup=${skipGroup}`, function (data) {
                 if (data.leftSideData.trim() === "") {
                     alertify.notify("Bạn không còn cuộc trò chuyện nào để xem.", "error", 7);
-                    $("#link-read-more-all-chat").css("display", "inline-block");
-                    $(".read-more-all-chat-loader").css("display", "none");
                     return false;
                 }
 
@@ -42,11 +40,19 @@ $(document).ready(function () {
                 // Step 08: Handle attachmentModal
                 $("body").append(data.attachmentModalData);
 
-                // Step 09: update online
+                // Step 09: Update online
                 socket.emit("check-status");
 
+                // Step 10: Remove loading
                 $("#link-read-more-all-chat").css("display", "inline-block");
                 $(".read-more-all-chat-loader").css("display", "none");
+
+                // Step 11: Call readMoreMessage
+                readMoreMessage();
+
+                // Extra
+                zoomImageChat();
+                userTalk();
             });
         }, 1000);
         

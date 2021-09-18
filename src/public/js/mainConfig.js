@@ -192,6 +192,38 @@ function bufferToBase64(arrayBuffer) {
   return btoa(new Uint8Array(arrayBuffer).reduce((data, byte) => data + String.fromCharCode(byte), ""));
 }
 
+function zoomImageChat() {
+  $(".show-image-chat").unbind("click").on("click", function() {
+    console.log("da click");
+    $("#img-chat-modal").css("display", "block");
+    $("#img-chat-modal-content").attr("src", $(this)[0].src);
+    
+    $("#img-chat-modal").on("click", function() {
+      $(this).css("display", "none");
+    });
+  });
+}
+
+function userTalk() {
+  $(".user-talk").unbind("click").on("click", function() {
+    let dataChat = $(this).data("uid");
+    $("ul.people").find(`a[href="#uid_${dataChat}"]`).click();
+    $(this).closest("div.modal").modal("hide");
+  })
+}
+
+function notYetConversations() {
+  Swal.fire({
+    title: "Bạn chưa có bạn bè nào. \n Tìm kiếm liên hệ mới ngay!",
+    type: "info",
+    showCancelButton: false,
+    confirmButtonColor: "#2ecc71",
+    confirmButtonText: "Xác nhận"
+  }).then(result => {
+    $("#contactsModal").modal("show");
+  })
+}
+
 $(document).ready(function() {
   // Hide số thông báo trên đầu icon mở modal contact
   showModalContacts();
@@ -222,7 +254,15 @@ $(document).ready(function() {
   convertEmoji();
   
   // Click vao phan tu dau tien cua cuoc tro chuyen
-  $("ul.people").find("a")[0].click();
+  if ($("ul.people").find("a").length) {
+    $("ul.people").find("a")[0].click();
+  } else {
+    notYetConversations();
+  }
+
+  // Extra
+  zoomImageChat();
+  userTalk();
 
   $("#video-chat-group").bind("click", function () {
     alertify.notify("Tính năng này không khả dụng với nhóm trò chuyện.", "error", 7);
